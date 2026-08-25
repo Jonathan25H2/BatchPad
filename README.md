@@ -30,7 +30,7 @@ Open `BatchPad.exe`, write or paste your Batch code and press **Run**.
 
 BatchPad is built with **C#**, **WPF** and **.NET 8**.
 
-To build it yourself, open the project in **Visual Studio 2022** with the .NET Desktop Development workload installed.
+To build it yourself, open the project in **Visual Studio 2022** (or newer) with the .NET Desktop Development workload installed.
 
 ## Security
 
