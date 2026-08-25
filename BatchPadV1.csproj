@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<ApplicationIcon>icon_1024x1024.ico</ApplicationIcon>
+
+		<!-- Standalone Windows x64 -->
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<SelfContained>true</SelfContained>
+
+		<!-- Single EXE -->
+		<PublishSingleFile>true</PublishSingleFile>
+
+		<!-- Important for native .NET/WPF dependencies -->
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+
+		<!-- WPF + trimming can cause problems -->
+		<PublishTrimmed>false</PublishTrimmed>
+
+		<!-- Keep symbols out of the publish folder -->
+		<DebugType>none</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="icon_1024x1024.ico" />
+	</ItemGroup>
+
+</Project>
