@@ -1,6 +1,6 @@
 # BatchPad
 A lightweight and simple Batch script editor and runner for Windows.
-<img width="1233" height="842" alt="image" src="https://github.com/user-attachments/assets/7dd61113-902d-42ec-8e59-d2e1dd651b04" />
+<img width="1233" height="842" alt="image" src="https://github.com/user-attachments/assets/62982e65-9fc0-4ca2-927a-a08571d8fa02" />
 
 ## Features
 
