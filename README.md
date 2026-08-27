@@ -8,6 +8,8 @@ Write and edit Batch scripts directly in the app.
 
 Run scripts with the **Run** button or `F5`.
 
+Save/Load function
+
 Stop a running script with the **Stop** button or `F6`.
 
 Scripts run in a normal Command Prompt window.
