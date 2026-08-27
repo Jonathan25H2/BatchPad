@@ -1,4 +1,5 @@
-﻿using System;
+using Microsoft.Win32;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -13,6 +14,7 @@ namespace BatchPadV1
     {
         private Process? runningProcess;
         private string? temporaryBatchFile;
+
 
         public MainWindow()
         {
@@ -32,6 +34,68 @@ namespace BatchPadV1
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
             StopScript();
+        }
+
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Title = "Save Batch File",
+                Filter = "Batch Files (*.bat)|*.bat|All Files (*.*)|*.*",
+                DefaultExt = ".bat",
+                AddExtension = true,
+                FileName = "script.bat"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    File.WriteAllText(
+                        dialog.FileName,
+                        CodeEditor.Text,
+                        new UTF8Encoding(false));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "BatchPad could not save the file.\n\n" + ex.Message,
+                        "BatchPad",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Title = "Load Batch File",
+                Filter = "Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All Files (*.*)|*.*",
+                CheckFileExists = true
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    CodeEditor.Text = File.ReadAllText(dialog.FileName);
+
+                    CodeEditor.Focus();
+                    CodeEditor.CaretIndex = CodeEditor.Text.Length;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "BatchPad could not load the file.\n\n" + ex.Message,
+                        "BatchPad",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
         }
 
 
@@ -57,6 +121,7 @@ namespace BatchPadV1
                     if (!runningProcess.HasExited)
                     {
                         StopScript();
+
                         await Task.Delay(200);
                     }
                 }
@@ -174,6 +239,7 @@ namespace BatchPadV1
             if (runningProcess == null)
             {
                 StopButton.IsEnabled = false;
+
                 return;
             }
 
@@ -240,6 +306,7 @@ namespace BatchPadV1
             if (e.Key == Key.F5)
             {
                 e.Handled = true;
+
                 await RunScriptAsync();
             }
 
@@ -247,6 +314,7 @@ namespace BatchPadV1
             else if (e.Key == Key.F6)
             {
                 e.Handled = true;
+
                 StopScript();
             }
         }
@@ -257,6 +325,7 @@ namespace BatchPadV1
             CancelEventArgs e)
         {
             StopScript();
+
             DeleteTemporaryFile();
         }
     }
